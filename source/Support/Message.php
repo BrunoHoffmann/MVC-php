@@ -7,11 +7,6 @@ class Message
     private $text;
     private $type;
 
-    public function __toString()
-    {
-        return $this->render();
-    }
-
     public function getText(): ?string 
     {
         return $this->text;

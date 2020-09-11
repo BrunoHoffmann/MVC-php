@@ -1,6 +1,7 @@
 <?php 
+
 session_start();
 require '../vendor/autoload.php';
-require '../src/routes.php';
+require '../routes/Web.php';
 
 $router->run($router->routes);

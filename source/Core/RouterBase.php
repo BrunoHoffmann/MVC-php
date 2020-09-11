@@ -4,21 +4,14 @@ namespace Source\Core;
 
 class RouterBase 
 {
-    /**
-     * Função responsável por executar o metodo de rotas
-     *
-     * @param array $routes
-     * 
-     * @return void
-     */
     public function run(array $routes): void
     {
         $method = Request::getMethod();
         $url = Request::getUrl();
 
         // Define os itens padrão
-        $controller = CONF_ERROR_CONTROLLER;
-        $action = CONF_DEFAULT_ACTION;
+        $controller = 'Error';
+        $action = 'index';
         $args = [];
 
         if (isset($routes[$method])) {

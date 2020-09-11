@@ -46,45 +46,21 @@ abstract class Model
         return ($this->data->$name ?? null);
     }
 
-    /**
-     * Função responsável por setar a data
-     *
-     * @return object|null
-     */
     public function data(): ?object 
     {
         return $this->data;
     }
 
-    /**
-     * Função responsável por retornar o metodo fail
-     *
-     * @return \PDOException|null
-     */
     public function fail(): ?\PDOException
     {
         return $this->fail;
     }
 
-    /**
-     * Função responsável por retornar o metodo de mensagem
-     *
-     * @return Message|null
-     */
     public function message(): ?Message
     {
         return $this->message;
     }
 
-    /**
-     * Função responsável por encontrar um resultado em determinada tabela com determinada condição
-     *
-     * @param string|null $terms
-     * @param string|null $params
-     * @param string $columns
-     * 
-     * @return object
-     */
     public function find(?string $terms = null, ?string $params = null, string $columns = "*"): Object
     {
         if ($terms) {
@@ -97,66 +73,30 @@ abstract class Model
         return $this;
     }
 
-    /**
-     * Função responsável por encontrar um resultado pelo seu id
-     *
-     * @param integer $id
-     * @param string $columns
-     * 
-     * @return Model|null
-     */
     public function findById(int $id, string $columns = "*"): ?Model 
     {
         $find = $this->find("ID = :ID", "ID={$id}", $columns);
         return $find->fetch();
     }
 
-    /**
-     * Função responsável por ordernar uma consulta no banco de dados
-     *
-     * @param string $columnOrder
-     * 
-     * @return Model
-     */
     public function order(string $columnOrder): Model 
     {
         $this->order = " ORDER BY {$columnOrder}";
         return $this;
     }
 
-    /**
-     * Função responsável por limitar a consulta feita 
-     *
-     * @param integer $limit
-     * 
-     * @return Model
-     */
     public function limit(int $limit): Model 
     {
         $this->limit = " LIMIT {$limit}";
         return $this;
     }
 
-    /**
-     * Função responsável por fazer o offset da consulta
-     *
-     * @param integer $offset
-     * 
-     * @return Model
-     */
     public function offset(int $offset): Model 
     {
         $this->offset = " OFFSET {$offset}";
         return $this;
     }
 
-    /**
-     * Função responsável por executar a query
-     *
-     * @param boolean $all
-     * 
-     * @return null|object
-     */
     public function fetch(bool $all = false): ?object
     {
         try {
@@ -178,11 +118,6 @@ abstract class Model
         }
     }
 
-    /**
-     * Função responsável por contar os resultados
-     *
-     * @return integer
-     */
     public function count(): int 
     {
         $stmt = Connect::getInstance()->prepare($this->query);
@@ -190,13 +125,6 @@ abstract class Model
         return $stmt->rowCount();
     }
 
-    /**
-     * Função responsável por inserir uma query 
-     *
-     * @param array $data
-     * 
-     * @return integer|null
-     */
     protected function create(array $data): ?int 
     {
         try {
@@ -213,15 +141,6 @@ abstract class Model
         }
     }
 
-    /**
-     * Função responsável por atualizar uma informação
-     *
-     * @param array $data
-     * @param string $terms
-     * @param string $params
-     * 
-     * @return integer|null
-     */
     protected function update(array $data, string $terms, string $params): ?int 
     {
         try {
@@ -242,11 +161,6 @@ abstract class Model
         }
     }
 
-    /**
-     * Funçao responsável por executar o metodo save de um insert, onde ele vai criar ou atualizar
-     *
-     * @return boolean
-     */
     public function save(): bool 
     {
         if (!$this->required()) {
@@ -276,24 +190,11 @@ abstract class Model
         $this->data = $this->findById($id)->data();
     }
 
-    /**
-     * Função responsável por retornar o ultimo id inserido 
-     *
-     * @return integer
-     */
     public function lastId(): int 
     {
         return Connect::getInstance()->query("SELECT MAX(id) AS maxId FROM {$this->entity}")->fetch()->maxId + 1;
     }
 
-    /**
-     * Função responsável por deletar um registro
-     *
-     * @param string $terms
-     * @param string|null $params
-     * 
-     * @return boolean
-     */
     public function delete(string $terms, ?string $params): bool 
     {
         try {
@@ -312,11 +213,6 @@ abstract class Model
         }
     }
 
-    /**
-     * Função responsável por executar o metodo delete 
-     *
-     * @return boolean
-     */
     public function destroy(): bool 
     {
         if (empty($this->ID)) {
@@ -327,11 +223,6 @@ abstract class Model
         return $destroy;
     }
 
-    /**
-     * 
-     *
-     * @return array|null
-     */
     protected function safe(): ?array 
     {
         $safe = (array)$this->data;
@@ -341,13 +232,6 @@ abstract class Model
         return $safe;
     }
 
-    /**
-     * Função responsável por filtrar um array de dados
-     *
-     * @param array $data
-     * 
-     * @return array|null
-     */
     private function filter(array $data): ?array 
     {
         $filter = [];
@@ -358,11 +242,6 @@ abstract class Model
         return $filter;
     }
 
-    /**
-     * Função responsável por definir se foi alimentado as colunas obrigatorias
-     *
-     * @return boolean
-     */
     protected function required(): bool 
     {
         $data = (array)$this->data();

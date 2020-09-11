@@ -1,0 +1,3 @@
+<?php 
+
+/** FUNCOES PARA AJUDAR */

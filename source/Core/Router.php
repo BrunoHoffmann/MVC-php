@@ -10,26 +10,12 @@ class Router extends RouterBase
     private $namespace;
     private $group;
 
-    /**
-     * Função responsável por trazer o namespace escolhido ou null
-     *
-     * @param null|string $namespace
-     * 
-     * @return Router
-     */
     public function namespace(?string $namespace): Router
     {
         $this->namespace = $namespace;
         return $this;
     }
 
-    /**
-     * Função responsável por definir um grupo de rotas
-     *
-     * @param string|null $group
-     * 
-     * @return void
-     */
     public function group(?string $group = null): void 
     {
         if (!$group) {
@@ -39,14 +25,6 @@ class Router extends RouterBase
         }
     }
 
-    /**
-     * Função responsável por executar o metodo get
-     *
-     * @param string $endpoint
-     * @param string $trigger
-     * 
-     * @return void
-     */
     public function get(string $endpoint, string $trigger): void
     {
         if ($endpoint == '/') {
@@ -61,14 +39,6 @@ class Router extends RouterBase
             
     }
 
-    /**
-     * Função responsável por executar o metodo post
-     *
-     * @param string $endpoint
-     * @param string $trigger
-     * 
-     * @return void
-     */
     public function post(string $endpoint, string $trigger): void
     {
         if ($endpoint == '/') {
@@ -82,14 +52,6 @@ class Router extends RouterBase
         }
     }
 
-    /**
-     * Função responsável por executar o metodo put
-     *
-     * @param string $endpoint
-     * @param string $trigger
-     * 
-     * @return void
-     */
     public function put(string $endpoint, string $trigger): void
     {   
         if ($endpoint == '/') {
@@ -103,14 +65,6 @@ class Router extends RouterBase
         }
     }
 
-    /**
-     * Função responsável por executar o metodo delete
-     *
-     * @param string $endpoint
-     * @param string $trigger
-     * 
-     * @return void
-     */
     public function delete(string $endpoint, string $trigger): void
     {
         if ($endpoint == '/') {
