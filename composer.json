@@ -1,11 +1,17 @@
 {
-    "require": {
-        "clancats/hydrahon": "^1.1"
+    "config": {
+        "vendor-dir": "vendor"
     },
     "autoload": {
         "psr-4": {
-            "core\\": "core/",
-            "src\\": "src/"
-        }
+            "Source\\": "source/"
+        },
+        "files": [
+            "source/Boot/Config.php",
+            "source/Boot/Helpers.php"
+        ]
+    },
+    "require": {
+
     }
 }
