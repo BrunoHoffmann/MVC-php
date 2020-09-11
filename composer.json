@@ -7,8 +7,8 @@
             "Source\\": "source/"
         },
         "files": [
-            "source/Boot/Config.php",
-            "source/Boot/Helpers.php"
+            "source/Config/Config.php",
+            "source/Config/Helpers.php"
         ]
     },
     "require": {
